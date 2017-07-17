@@ -5,11 +5,6 @@ import (
 	"math/big"
 )
 
-var (
-	ONE       = NewFloat(1)
-	ONE_EXACT = NewExactFloat(1)
-)
-
 type Float struct {
 	exact bool
 	value float64
@@ -34,11 +29,11 @@ func NewExactFloat(value float64) *Float {
 	}
 }
 
-func FloatOne(exact bool) *Float {
+func newFloat(exact bool, value float64) *Float {
 	if exact {
-		return ONE_EXACT
+		return NewExactFloat(value)
 	}
-	return ONE
+	return NewFloat(value)
 }
 
 func (f Float) IsExact() bool {
@@ -46,7 +41,7 @@ func (f Float) IsExact() bool {
 }
 
 func (f Float) Copy() *Float {
-	if f.exact {
+	if f.IsExact() {
 		return NewExactFloat(f.value)
 	}
 	return NewFloat(f.value)
@@ -57,7 +52,7 @@ func (f Float) Add(d2 *Float) *Float {
 	if d2 == nil {
 		return f.Copy()
 	}
-	if f.exact && d2.exact {
+	if f.IsExact() && d2.IsExact() {
 		ef := NewExactFloat(0)
 		ef.float.Add(f.float, d2.float)
 		return ef
@@ -70,7 +65,7 @@ func (f Float) Sub(d2 *Float) *Float {
 	if d2 == nil {
 		return f.Copy()
 	}
-	if f.exact && d2.exact {
+	if f.IsExact() && d2.IsExact() {
 		ef := NewExactFloat(0)
 		ef.float.Sub(f.float, d2.float)
 		return ef
@@ -83,7 +78,7 @@ func (f Float) Mul(d2 *Float) *Float {
 	if d2 == nil {
 		return f.Copy()
 	}
-	if f.exact && d2.exact {
+	if f.IsExact() && d2.IsExact() {
 		ef := NewExactFloat(0)
 		ef.float.Mul(f.float, d2.float)
 		return ef
@@ -94,7 +89,7 @@ func (f Float) Mul(d2 *Float) *Float {
 // Quo returns f / d2.
 func (f Float) Quo(d2 *Float) *Float {
 	if d2.value == 0 {
-		if f.exact && d2.exact {
+		if f.IsExact() && d2.IsExact() {
 			return NewExactFloat(math.MaxFloat64)
 		}
 		return NewFloat(math.MaxFloat64)
@@ -102,7 +97,7 @@ func (f Float) Quo(d2 *Float) *Float {
 	if d2 == nil {
 		return f.Copy()
 	}
-	if f.exact && d2.exact {
+	if f.IsExact() && d2.IsExact() {
 		ef := NewExactFloat(0)
 		ef.float.Quo(f.float, d2.float)
 		return ef
@@ -110,10 +105,10 @@ func (f Float) Quo(d2 *Float) *Float {
 	return NewFloat(f.value / d2.value)
 }
 
-// Float64 returns the nearest float64 value for f and a bool if exactly.
-func (f Float) Float64() (float64, bool) {
+// Float64 returns the nearest float64 value for f exactly.
+func (f Float) Float64() float64 {
 	if f.IsExact() {
 		f.value, _ = f.float.Float64()
 	}
-	return f.value, f.exact
+	return f.value
 }

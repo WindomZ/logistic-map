@@ -1,9 +1,10 @@
 package logisticmap
 
 import (
-	"github.com/WindomZ/testify/assert"
 	"math"
 	"testing"
+
+	"github.com/WindomZ/testify/assert"
 )
 
 func TestNewLogistic(t *testing.T) {
