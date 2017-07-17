@@ -12,6 +12,8 @@ often cited as an archetypal example of how complex, chaotic behaviour can arise
 
 ## Usage
 
+[![GoDoc](https://godoc.org/github.com/WindomZ/logistic-map?status.svg)](https://godoc.org/github.com/WindomZ/logistic-map)
+
 ### Logistic map
 
 ```go
@@ -23,7 +25,7 @@ result := logistic.LogisticMap(3.999, 0.2, 5000)
 ...
 ```
 
-#### Improved
+### Improved logistic map
 
 Automatically adjust parameter `u` in `(3.569945673, 4)`.
 
