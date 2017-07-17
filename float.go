@@ -88,14 +88,14 @@ func (f Float) Mul(d2 *Float) *Float {
 
 // Quo returns f / d2.
 func (f Float) Quo(d2 *Float) *Float {
+	if d2 == nil {
+		return f.Copy()
+	}
 	if d2.value == 0 {
 		if f.IsExact() && d2.IsExact() {
 			return NewExactFloat(math.MaxFloat64)
 		}
 		return NewFloat(math.MaxFloat64)
-	}
-	if d2 == nil {
-		return f.Copy()
 	}
 	if f.IsExact() && d2.IsExact() {
 		ef := NewExactFloat(0)
