@@ -5,6 +5,7 @@ import (
 	"math/big"
 )
 
+// Float compatible with normal float64, or math/big.Float if exact is true.
 type Float struct {
 	exact bool
 	value float64
@@ -19,7 +20,7 @@ func NewFloat(value float64) *Float {
 	}
 }
 
-// NewFloat allocates and returns a new Float set to value,
+// NewExactFloat allocates and returns a new Float set to value,
 // with precision 53 and rounding mode ToNearestEven.
 func NewExactFloat(value float64) *Float {
 	return &Float{
@@ -36,10 +37,12 @@ func newFloat(exact bool, value float64) *Float {
 	return NewFloat(value)
 }
 
+// IsExact returns true if uses of math/big.
 func (f Float) IsExact() bool {
 	return f.exact && f.float != nil
 }
 
+// Copy allocates and returns a new same Float.
 func (f Float) Copy() *Float {
 	if f.IsExact() {
 		return NewExactFloat(f.value)
