@@ -2,6 +2,11 @@
 
 > Logistic map algorithm and its improved algorithms.
 
+[![Build Status](https://travis-ci.org/WindomZ/logistic-map.svg?branch=master)](https://travis-ci.org/WindomZ/logistic-map)
+[![Coverage Status](https://coveralls.io/repos/github/WindomZ/logistic-map/badge.svg?branch=master)](https://coveralls.io/github/WindomZ/logistic-map?branch=master)
+[![Go Report Card](https://goreportcard.com/badge/github.com/WindomZ/logistic-map)](https://goreportcard.com/report/github.com/WindomZ/logistic-map)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
+
 The [logistic map](https://en.wikipedia.org/wiki/Logistic_map) is a polynomial mapping (equivalently, recurrence relation) of degree 2, 
 often cited as an archetypal example of how complex, chaotic behaviour can arise from very simple non-linear dynamical equations.
 
