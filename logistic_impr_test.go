@@ -30,12 +30,12 @@ func TestLogisticImprovedMap(t *testing.T) {
 	const x = 0.2
 	const COUNT = 30000
 
-	result := LogisticImprovedMap(x, 100, COUNT)
+	result := LogisticImprovedMap(x, 1000, COUNT)
 
 	avgs := make([]int, 10)
 	for _, r := range result {
 		avgs[int(math.Floor(r*10.0))]++
 	}
 
-	assert.Equal(t, avgs, []int{964, 1489, 1641, 1318, 1887, 4111, 4653, 6600, 4073, 3265})
+	assert.Equal(t, avgs, []int{1333, 1471, 1654, 1884, 2401, 3526, 4126, 5655, 4519, 3432})
 }
