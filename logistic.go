@@ -1,5 +1,6 @@
 package logisticmap
 
+// ILogistic interface of logistic map algorithm.
 type ILogistic interface {
 	Next() ILogistic
 	Value() float64
